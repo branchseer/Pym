@@ -27,7 +27,7 @@
     "comlink": "3.1.1",
     "copy-webpack-plugin": "4.6.0",
     "critters-webpack-plugin": "2.2.0",
-    "css-loader": "1.0.1",
+    "css-loader": "2.1.0",
     "ejs": "2.6.1",
     "exports-loader": "0.7.0",
     "file-drop-element": "0.0.9",
