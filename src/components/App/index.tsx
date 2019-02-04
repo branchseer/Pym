@@ -15,10 +15,6 @@ const compressPromise = import(
   /* webpackChunkName: "main-app" */
   '../compress',
 );
-const offlinerPromise = import(
-  /* webpackChunkName: "offliner" */
-  '../../lib/offliner',
-);
 
 function back() {
   window.history.back();
@@ -49,8 +45,6 @@ export default class App extends Component<Props, State> {
     }).catch(() => {
       this.showSnack('Failed to load app');
     });
-
-    offlinerPromise.then(({ offliner }) => offliner(this.showSnack));
 
     // In development, persist application state across hot reloads:
     if (process.env.NODE_ENV === 'development') {
