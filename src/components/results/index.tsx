@@ -6,6 +6,8 @@ import { DownloadIcon, CopyAcrossIcon, CopyAcrossIconProps } from '../../lib/ico
 import '../custom-els/LoadingSpinner';
 import { SourceImage } from '../compress';
 import { Fileish, bind } from '../../lib/initial-util';
+import { } from 'deskgap';
+const { asyncNode } = window.deskgap;
 
 interface Props {
   loading: boolean;
@@ -59,7 +61,22 @@ export default class Results extends Component<Props, State> {
   }
 
   @bind
-  onDownload() {
+  onDownload(e: MouseEvent) {
+    e.preventDefault();
+    const { imageFile } = this.props;
+    if (imageFile == null) return;
+
+    const imageFileReader = new FileReader();
+    imageFileReader.readAsDataURL(imageFile);
+    imageFileReader.onloadend = function () {
+
+      const base64URL = this.result as string;
+      const base64 = base64URL.substring(base64URL.indexOf(',') + 1);
+
+      asyncNode.require('.').then((entryModule) => {
+        return entryModule.invoke('saveFile', imageFile.name, base64).value();
+      });
+    };
   }
 
   render(
@@ -94,9 +111,8 @@ export default class Results extends Component<Props, State> {
           {(downloadUrl && imageFile) && (
             <a
               class={`${style.downloadLink} ${showLoadingState ? style.downloadLinkDisable : ''}`}
-              href={downloadUrl}
-              download={imageFile.name}
-              title="Download"
+              title="Save"
+              href=""
               onClick={this.onDownload}
             >
               <DownloadIcon class={style.downloadIcon} />
