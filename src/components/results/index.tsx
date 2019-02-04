@@ -7,7 +7,7 @@ import '../custom-els/LoadingSpinner';
 import { SourceImage } from '../compress';
 import { Fileish, bind } from '../../lib/initial-util';
 import { } from 'deskgap';
-const { asyncNode } = window.deskgap;
+const { messageUI } = window.deskgap;
 
 interface Props {
   loading: boolean;
@@ -73,9 +73,7 @@ export default class Results extends Component<Props, State> {
       const base64URL = this.result as string;
       const base64 = base64URL.substring(base64URL.indexOf(',') + 1);
 
-      asyncNode.require('.').then((entryModule) => {
-        return entryModule.invoke('saveFile', imageFile.name, base64).value();
-      });
+      messageUI.send('save-file', imageFile.name, base64);
     };
   }
 
