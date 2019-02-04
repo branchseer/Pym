@@ -34,8 +34,3 @@ declare module 'url-loader!*' {
 }
 
 declare var VERSION: string;
-
-declare var ga: {
-  (...args: any[]): void;
-  q: any[];
-};
