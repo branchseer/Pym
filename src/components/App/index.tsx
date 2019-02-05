@@ -24,7 +24,7 @@ interface Props {}
 
 interface State {
   file?: File | Fileish;
-  isEditorOpen: Boolean;
+  isEditorOpen: boolean;
   Compress?: typeof import('../compress').default;
 }
 
@@ -96,6 +96,16 @@ export default class App extends Component<Props, State> {
     if (this.state.isEditorOpen) return;
     history.pushState(null, '', ROUTE_EDITOR);
     this.setState({ isEditorOpen: true });
+  }
+
+  componentDidUpdate(prevProps: Props, prevState: State, prevContext: any) {
+    if (window.deskgap == null || window.deskgap.platform !== 'darwin') return;
+    if (prevState.isEditorOpen !== this.state.isEditorOpen) {
+      window.deskgap.asyncNode.getCurrentWindow().invoke(
+        'setTitleBarStyle',
+        this.state.isEditorOpen ? 'default' : 'hidden',
+      ).value();
+    }
   }
 
   render({}: Props, { file, isEditorOpen, Compress }: State) {

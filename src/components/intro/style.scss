@@ -33,6 +33,11 @@
   height: 100%;
   box-sizing: border-box;
   overscroll-behavior: contain;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 .logo-container {

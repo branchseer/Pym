@@ -43,7 +43,13 @@ export default class Intro extends Component<Props, State> {
           </div>
           <p class={style.openImageGuide}>
             Drag &amp; drop or{' '}
-            <button class={style.selectButton} onClick={this.onButtonClick}>select an image</button>
+            <button
+              data-deskgap-no-drag
+              class={style.selectButton}
+              onClick={this.onButtonClick}
+            >
+              select an image
+            </button>
             <input
               class={style.hide}
               ref={linkRef(this, 'fileInput')}
