@@ -1,5 +1,5 @@
 node_modules
-/build
+/app/build
 /*.log
 *.scss.d.ts
 *.css.d.ts

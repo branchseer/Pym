@@ -5,7 +5,7 @@
   "license": "apache-2.0",
   "scripts": {
     "start-dev-server": "webpack-dev-server --host 0.0.0.0 --hot",
-    "start": "deskgap .",
+    "start": "deskgap app/",
     "build": "webpack -p",
     "lint": "tslint -c tslint.json  -p tsconfig.json -t verbose 'src/**/*.{ts,tsx,js,jsx}'",
     "lintfix": "tslint -c tslint.json -p tsconfig.json -t verbose --fix 'src/**/*.{ts,tsx,js,jsx}'"

@@ -8,9 +8,10 @@ messageNode.on('save-file', (e, fileName, fileContentBase64) => {
     });
 });
 
-
 app.once('ready', () => {
     const win = new BrowserWindow({
+        titleBarStyle: "hidden",
+        menu: null,
         show: false
     }).once('ready-to-show', function() {
         this.show();

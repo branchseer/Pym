@@ -23,6 +23,8 @@ function readJson (filename) {
 
 const VERSION = readJson('./package.json').version;
 
+const outputPath = path.join(__dirname, 'app', 'build');
+
 module.exports = async function (_, env) {
   const isProd = env.mode === 'production';
   const nodeModules = path.join(__dirname, 'node_modules');
@@ -45,7 +47,7 @@ module.exports = async function (_, env) {
     output: {
       filename: isProd ? '[name].[chunkhash:5].js' : '[name].js',
       chunkFilename: '[name].[chunkhash:5].js',
-      path: path.join(__dirname, 'build'),
+      path: outputPath,
       publicPath: '/',
       globalObject: 'self'
     },
@@ -188,7 +190,7 @@ module.exports = async function (_, env) {
         'assets',
         '**/*.{css,js,json,html,map}'
       ], {
-        root: path.join(__dirname, 'build'),
+        root: outputPath,
         verbose: false,
         beforeEmit: true
       }),
@@ -230,7 +232,7 @@ module.exports = async function (_, env) {
 
       // For now we're not doing SSR.
       new HtmlPlugin({
-        filename: path.join(__dirname, 'build/index.html'),
+        filename: path.join(outputPath, 'index.html'),
         template: isProd ? '!!prerender-loader?string!src/index.html' : 'src/index.html',
         minify: isProd && {
           collapseWhitespace: true,
@@ -239,7 +241,6 @@ module.exports = async function (_, env) {
           removeRedundantAttributes: true,
           removeComments: true
         },
-        manifest: readJson('./src/manifest.json'),
         inject: 'body',
         compile: true
       }),
@@ -270,7 +271,6 @@ module.exports = async function (_, env) {
 
       // Copying files via Webpack allows them to be served dynamically by `webpack serve`
       new CopyPlugin([
-        { from: 'src/manifest.json', to: 'manifest.json' },
         { from: 'src/assets', to: 'assets' }
       ]),
 
@@ -302,7 +302,7 @@ module.exports = async function (_, env) {
       minimizer: [
         new TerserPlugin({
           sourceMap: isProd,
-          extractComments: 'build/licenses.txt',
+          extractComments: path.join(outputPath, 'licenses.txt'),
           terserOptions: {
             compress: {
               inline: 1
