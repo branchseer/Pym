@@ -6,7 +6,7 @@ import { DownloadIcon, CopyAcrossIcon, CopyAcrossIconProps } from '../../lib/ico
 import '../custom-els/LoadingSpinner';
 import { SourceImage } from '../compress';
 import { Fileish, bind } from '../../lib/initial-util';
-import { } from 'deskgap';
+
 const { messageUI } = window.deskgap;
 
 interface Props {

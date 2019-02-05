@@ -1,3 +1,5 @@
+/// <reference types="deskgap" />
+
 declare const __webpack_public_path__: string;
 declare const PRERENDER: boolean;
 
