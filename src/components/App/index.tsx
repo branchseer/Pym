@@ -9,7 +9,7 @@ import '../../lib/SnackBar';
 import Intro from '../intro';
 import '../custom-els/LoadingSpinner';
 
-const { platform, asyncNode } = window.deskgap;
+const { messageUI } = window.deskgap;
 
 const ROUTE_EDITOR = '/editor';
 
@@ -101,18 +101,10 @@ export default class App extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State, prevContext: any) {
-    if (platform !== 'darwin') return;
     const { isEditorOpen } = this.state;
     if (prevState.isEditorOpen !== isEditorOpen) {
       document.body.classList.toggle('editing', isEditorOpen);
-      asyncNode.getCurrentWindow().invoke(
-        'setTitleBarStyle',
-        isEditorOpen ? 'default' : 'hidden',
-      ).value();
-      asyncNode.getCurrentWindow().invoke(
-        'setVibrancy',
-        isEditorOpen ? null : 'appearance',
-      ).value();
+      messageUI.send('is-editing-changed', isEditorOpen);
     }
   }
 

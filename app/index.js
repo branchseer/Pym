@@ -10,15 +10,32 @@ messageNode.on('save-file', (e, fileName, fileContentBase64) => {
     });
 });
 
+function onIsEditingChanged(isEditing) {
+    if (process.platform === 'darwin') {
+        win.setTitleBarStyle(isEditing ? 'default': 'hidden');
+        win.setVibrancy(isEditing ? null : 'under-window-background');
+    }
+
+    win.setMinimumSize(...(isEditing ? [800, 600] : [0, 0]));
+    if (isEditing) {
+        let [width, height] = win.getSize();
+        win.setSize(Math.max(width, 800), Math.max(height, 600))
+    }
+};
+
+messageNode.on('is-editing-changed', (e, isEditing) => onIsEditingChanged(isEditing));
+
 app.once('ready', () => {
     win = new BrowserWindow({
-        titleBarStyle: "hidden",
         menu: null,
         show: false,
-        vibrancy: 'under-window-background'
+        width: 600,
+        height: 370
     }).once('ready-to-show', function() {
         this.show();
     });
+
+    onIsEditingChanged(false);
 
     systemPreferences.on('dark-mode-toggled', () => {
         win.webContents.send('dark-mode-toggled', systemPreferences.isDarkMode());
