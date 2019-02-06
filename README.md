@@ -2,7 +2,7 @@
 
 Pym is a desktop app that wraps the web app [Squoosh](https://squoosh.app) using [DeskGap](https://github.com/patr0nus/DeskGap).
 
-[Squoosh] is an image compression web app that allows you to dive into the advanced options provided
+[Squoosh](https://squoosh.app) is an image compression web app that allows you to dive into the advanced options provided
 by various image compressors.
 
 Image compression is handled locally; no additional data is sent to the server.
