@@ -112,7 +112,7 @@ module.exports = async function (_, env) {
           include: componentStyleDirs,
           use: [
             // In production, CSS is extracted to files on disk. In development, it's inlined into JS:
-            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            'style-loader',
             {
               loader: 'css-loader',
               options: {
@@ -132,7 +132,7 @@ module.exports = async function (_, env) {
           // Process non-modular CSS everywhere *except* `src/components/*`
           exclude: componentStyleDirs,
           use: [
-            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            'style-loader',
             {
               loader: 'css-loader',
               options: {
@@ -233,7 +233,7 @@ module.exports = async function (_, env) {
       // For now we're not doing SSR.
       new HtmlPlugin({
         filename: path.join(outputPath, 'index.html'),
-        template: isProd ? '!!prerender-loader?string!src/index.html' : 'src/index.html',
+        template: false && isProd ? '!!prerender-loader?string!src/index.html' : 'src/index.html',
         minify: isProd && {
           collapseWhitespace: true,
           removeScriptTypeAttributes: true,

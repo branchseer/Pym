@@ -9,6 +9,8 @@ import '../../lib/SnackBar';
 import Intro from '../intro';
 import '../custom-els/LoadingSpinner';
 
+const { platform, asyncNode } = window.deskgap;
+
 const ROUTE_EDITOR = '/editor';
 
 const compressPromise = import(
@@ -99,11 +101,13 @@ export default class App extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State, prevContext: any) {
-    if (window.deskgap == null || window.deskgap.platform !== 'darwin') return;
-    if (prevState.isEditorOpen !== this.state.isEditorOpen) {
-      window.deskgap.asyncNode.getCurrentWindow().invoke(
+    if (platform !== 'darwin') return;
+    const { isEditorOpen } = this.state;
+    if (prevState.isEditorOpen !== isEditorOpen) {
+      document.body.classList.toggle('editing', isEditorOpen);
+      asyncNode.getCurrentWindow().invoke(
         'setTitleBarStyle',
-        this.state.isEditorOpen ? 'default' : 'hidden',
+        isEditorOpen ? 'default' : 'hidden',
       ).value();
     }
   }
