@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, messageNode } = require('deskgap');
+const { app, BrowserWindow, dialog, messageNode, systemPreferences } = require('deskgap');
 const fs = require('fs');
 
 let win = null;
@@ -15,8 +15,13 @@ app.once('ready', () => {
         titleBarStyle: "hidden",
         menu: null,
         show: false,
+        vibrancy: 'under-window-background'
     }).once('ready-to-show', function() {
         this.show();
+    });
+
+    systemPreferences.on('dark-mode-toggled', () => {
+        win.webContents.send('dark-mode-toggled', systemPreferences.isDarkMode());
     });
 
     win.loadFile("./build/index.html");

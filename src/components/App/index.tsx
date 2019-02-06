@@ -109,6 +109,10 @@ export default class App extends Component<Props, State> {
         'setTitleBarStyle',
         isEditorOpen ? 'default' : 'hidden',
       ).value();
+      asyncNode.getCurrentWindow().invoke(
+        'setVibrancy',
+        isEditorOpen ? null : 'appearance',
+      ).value();
     }
   }
 

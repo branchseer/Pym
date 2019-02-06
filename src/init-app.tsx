@@ -3,6 +3,24 @@ import './lib/fix-pmc';
 import './style';
 import App from './components/App';
 
+const { platform, asyncNode, messageUI } = window.deskgap;
+
+document.body.classList.add(`platform-${platform}`);
+
+(async () => {
+  const nodeDeskgap = await asyncNode.require('deskgap');
+
+  messageUI.on('dark-mode-toggled', (e, inDarkMode) => {
+    document.body.classList.toggle('dark', inDarkMode);
+  });
+
+  document.body.classList.toggle(
+    'dark',
+    await nodeDeskgap.prop('systemPreferences').invoke('isDarkMode').value(),
+  );
+
+})();
+
 // Find the outermost Element in our server-rendered HTML structure.
 let root = document.getElementById('app_root') as Element;
 

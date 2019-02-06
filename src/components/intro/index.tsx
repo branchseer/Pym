@@ -7,6 +7,8 @@ import logo from './imgs/logo.svg';
 import * as style from './style.scss';
 import SnackBarElement from '../../lib/SnackBar';
 
+const { platform } = window.deskgap;
+
 interface Props {
   onFile: (file: File | Fileish) => void;
   showSnack: SnackBarElement['showSnackbar'];
@@ -35,38 +37,34 @@ export default class Intro extends Component<Props, State> {
   render({ }: Props, { fetchingDemoIndex }: State) {
     return (
       <div class={style.intro} data-deskgap-drag>
+        {
+          platform === 'darwin' ?
+          <h1 class={style.title}>Pym</h1>
+          : null
+        }
         <div>
           <div class={style.logoSizer}>
             <div class={style.logoContainer}>
               <img src={logo} class={style.logo} alt="Squoosh" decoding="async" />
             </div>
           </div>
-          <p class={style.openImageGuide}>
-            Drag &amp; drop or{' '}
-            <button
-              data-deskgap-no-drag
-              class={style.selectButton}
-              onClick={this.onButtonClick}
-            >
-              select an image
-            </button>
-            <input
-              class={style.hide}
-              ref={linkRef(this, 'fileInput')}
-              type="file"
-              onChange={this.onFileChange}
-            />
-          </p>
         </div>
-        <ul class={style.relatedLinks}>
-          <li><a href="https://github.com/GoogleChromeLabs/squoosh/">View the code</a></li>
-          <li><a href="https://github.com/GoogleChromeLabs/squoosh/issues">Report a bug</a></li>
-          <li>
-            <a href="https://github.com/GoogleChromeLabs/squoosh/blob/master/README.md#privacy">
-              Privacy
-            </a>
-          </li>
-        </ul>
+        <p class={style.openImageGuide}>
+          Drag &amp; drop or{' '}
+          <button
+            data-deskgap-no-drag
+            class={style.selectButton}
+            onClick={this.onButtonClick}
+          >
+            select an image
+          </button>
+          <input
+            class={style.hide}
+            ref={linkRef(this, 'fileInput')}
+            type="file"
+            onChange={this.onFileChange}
+          />
+        </p>
       </div>
     );
   }

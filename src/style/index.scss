@@ -8,8 +8,30 @@ html, body {
   overflow: hidden;
   overscroll-behavior: none;
   contain: strict;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path d="M1 2V0h1v1H0v1z" fill-opacity=".025"/></svg>');
   background-size: 20px 20px;
+}
+
+body:not(.platform-darwin):not(.editing).dark {
+  background-color: #303133;
+}
+
+body.editing {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path d="M1 2V0h1v1H0v1z" fill-opacity=".025"/></svg>');
+}
+body.dark.editing {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path d="M1 2V0h1v1H0v1z" fill-opacity=".1"/></svg>');
+  background-color: #353535;
+}
+
+body {
+  --secondary-label-color: #5e5e5e;
+  --window-title-color: #4D4D4D;
+}
+
+body.dark {
+  --secondary-label-color: #CECFCF;
+  --window-title-color: #BBBBBB;
+
 }
 
 :root {
