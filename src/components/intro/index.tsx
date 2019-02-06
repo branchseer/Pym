@@ -42,13 +42,7 @@ export default class Intro extends Component<Props, State> {
           <h1 class={style.title}>Pym</h1>
           : null
         }
-        <div>
-          <div class={style.logoSizer}>
-            <div class={style.logoContainer}>
-              <img src={logo} class={style.logo} alt="Squoosh" decoding="async" />
-            </div>
-          </div>
-        </div>
+        <img src={logo} class={style.logo} alt="Squoosh" decoding="async" />
         <p class={style.openImageGuide}>
           Drag &amp; drop or{' '}
           <button
