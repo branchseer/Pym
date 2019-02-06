@@ -1,5 +1,20 @@
-const { app, BrowserWindow, dialog, messageNode, systemPreferences } = require('deskgap');
+const { app, BrowserWindow, dialog, messageNode, systemPreferences, MenuItem, shell } = require('deskgap');
 const fs = require('fs');
+
+if (process.platform === 'darwin') {
+    const viewMenu = app.getMenu().items.find(item => item.label === 'View').submenu;
+    const helpMenu = app.getMenu().items.find(item => item.label === 'Help').submenu;
+
+    viewMenu.items.splice(0, 3); // Removes 'Reload' And 'Toggle Developer Tools
+    helpMenu.items.splice(0, 2); // Removes DeskGap links
+
+    helpMenu.append(new MenuItem({
+        label: 'Website',
+        click() {
+            shell.openExternal('https://github.com/patr0nus/Pym');
+        }
+    }));
+}
 
 let win = null;
 
