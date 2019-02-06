@@ -3,7 +3,7 @@ import { h, Component } from 'preact';
 import { bind, linkRef, Fileish } from '../../lib/initial-util';
 import '../custom-els/LoadingSpinner';
 
-import logo from './imgs/logo.svg';
+import logo from './imgs/logo.png';
 import * as style from './style.scss';
 import SnackBarElement from '../../lib/SnackBar';
 
