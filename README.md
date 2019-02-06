@@ -1,17 +1,17 @@
-# [Squoosh]!
+# Pym
+
+Pym is a desktop app that wraps the web app [Squoosh](https://squoosh.app) using [DeskGap](https://github.com/patr0nus/DeskGap).
 
 [Squoosh] is an image compression web app that allows you to dive into the advanced options provided
 by various image compressors.
 
-# Privacy
-
-Google Analytics is used to record the following:
-
-* [Basic visit data](https://support.google.com/analytics/answer/6004245?ref_topic=2919631).
-* Before and after image size once an image is downloaded. These values are rounded to the nearest
-  kilobyte.
-
 Image compression is handled locally; no additional data is sent to the server.
+
+On top of it, Pym features:
+
+- Dark mode support on macOS 10.14+ and Windows 10 1809+.
+- Native file dialog for image exporting.
+- No Google Analytics tracking.
 
 # Building locally
 
@@ -22,10 +22,8 @@ npm install
 npm run build
 ```
 
-You can run the development server with:
+You can run the app with:
 
 ```sh
 npm start
 ```
-
-[Squoosh]: https://squoosh.app
